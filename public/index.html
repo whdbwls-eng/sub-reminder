@@ -1,0 +1,113 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subscription Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbf5f1; --blush:#f3dcd6; --rose:#d9a6a0; --berry:#8e3b52; --nude:#e8cfc4;
+  --ink:#4a3a3a; --mute:#9a8683; --gold:#b98f5b; --line:#ead9d1; --card:#fffdfb;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-weight:300;
+  background:radial-gradient(900px 500px at 85% -10%,#f6d9d3 0,transparent 60%),radial-gradient(700px 500px at -10% 30%,#f1e3d6 0,transparent 55%),var(--cream)}
+.wrap{max-width:760px;margin:0 auto;padding:56px 20px 80px}
+header{text-align:center;margin-bottom:34px}
+.eyebrow{letter-spacing:.35em;font-size:.7rem;color:var(--gold);text-transform:uppercase}
+h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:3rem;margin:.3rem 0 .1rem;letter-spacing:.02em}
+h1 i{color:var(--berry);font-weight:400}
+.orn{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--gold);margin:10px 0}
+.orn:before,.orn:after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn:after{transform:scaleX(-1)}
+.summary{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-top:18px}
+.stat small{display:block;letter-spacing:.2em;font-size:.65rem;color:var(--mute);text-transform:uppercase}
+.stat b{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2rem}
+.stat b span{font-size:.9rem;color:var(--mute);margin-left:2px}
+.topic{margin-top:14px;font-size:.75rem;color:var(--mute)}
+.topic code{background:var(--blush);padding:2px 8px;border-radius:99px;color:var(--berry)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px;box-shadow:0 20px 50px -30px rgba(142,59,82,.35)}
+.panel h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;margin:0 0 14px;color:var(--berry)}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px 18px;align-items:end}
+label.f{display:block;font-size:.68rem;letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+input,select{width:100%;margin-top:4px;padding:8px 2px;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;font-size:.95rem;color:var(--ink);outline:0;border-radius:0}
+input:focus,select:focus{border-color:var(--rose)}
+.chk{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink);cursor:pointer}
+.chk input{width:auto;margin:0;accent-color:var(--berry)}
+button{font:inherit;cursor:pointer;border:0;border-radius:99px;padding:10px 22px;font-size:.82rem;letter-spacing:.08em;transition:.2s}
+.btn{color:#fff;background:linear-gradient(135deg,#d9a6a0,#b97a82 55%,#a15a6a);box-shadow:0 8px 18px -8px rgba(142,59,82,.6)}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.ghost{background:transparent;color:var(--mute);border:1px solid var(--line);padding:7px 16px;font-size:.75rem}
+.ghost:hover{color:var(--berry);border-color:var(--rose)}
+.gold{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:7px 16px;font-size:.75rem}
+.gold:hover{background:var(--gold);color:#fff}
+
+.list-head{display:flex;justify-content:space-between;align-items:baseline;margin:38px 4px 10px}
+.list-head h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.6rem;margin:0}
+.card{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 20px;margin:12px 0;position:relative;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-2px);box-shadow:0 18px 34px -24px rgba(142,59,82,.45)}
+.drop{flex:none;width:46px;height:46px;border-radius:50% 50% 50% 8%;transform:rotate(-45deg);
+  background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.85) 0 12%,transparent 13%),var(--c);box-shadow:inset -4px -6px 10px rgba(0,0,0,.08),0 6px 12px -6px var(--c)}
+.info{flex:1;min-width:0}
+.info b{font-family:'Cormorant Garamond','Noto Sans KR',serif;font-weight:600;font-size:1.25rem}
+.info .meta{font-size:.78rem;color:var(--mute);margin-top:2px}
+.tag{display:inline-block;margin-left:8px;font-family:'Noto Sans KR';font-size:.62rem;letter-spacing:.12em;color:var(--gold);border:1px solid var(--gold);border-radius:99px;padding:1px 8px;vertical-align:middle}
+.dd{flex:none;text-align:center;min-width:64px;padding:7px 12px;border-radius:99px;background:var(--blush);color:var(--berry);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.1rem}
+.dd.soon{background:#f7e4c8;color:#9a6a22}
+.dd.now{background:var(--berry);color:#fff}
+.acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.empty{text-align:center;color:var(--mute);padding:40px 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem}
+@media(max-width:560px){.card{flex-wrap:wrap}.acts{width:100%;justify-content:flex-start}h1{font-size:2.3rem}}
+</style>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Personal Membership Care</div>
+    <h1>Subscription <i>Atelier</i></h1>
+    <div class="orn">✦</div>
+    <div class="summary">
+      <div class="stat"><small>Monthly</small><b><span id="total">0</span><span>원</span></b></div>
+      <div class="stat"><small>Active</small><b id="count">0</b></div>
+    </div>
+    <div class="topic"><span id="topicwrap">알림 토픽 <code id="topic"></code> · </span><button class="ghost" onclick="testPush()">테스트 푸시</button></div>
+  </header>
+
+  <section class="panel">
+    <h2>새 구독 등록</h2>
+    <form id="f">
+      <label class="f">서비스<input name="name" placeholder="예) Netflix" required></label>
+      <label class="f">금액 (원)<input name="price" type="number" min="0" placeholder="0"></label>
+      <label class="f">주기<select name="cycle"><option value="monthly">매월</option><option value="yearly">매년</option><option value="weekly">매주</option></select></label>
+      <label class="f">결제일 / 체험 종료일<input name="date" type="date" required></label>
+      <label class="chk"><input name="trial" type="checkbox"> 무료체험 중</label>
+      <button class="btn">등록하기</button>
+    </form>
+  </section>
+
+  <div class="list-head"><h2>My Subscriptions</h2></div>
+  <div id="list"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s), api=(u,m='GET',b)=>fetch(u,{method:m,headers:{'Content-Type':'application/json'},body:b&&JSON.stringify(b)}).then(r=>r.json());
+const unit={monthly:'월',yearly:'년',weekly:'주'};
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shades=['#e8a5a5','#d98aa0','#c76a86','#b9788f','#e2b8a0','#d4a373','#c9a0b8','#a9657a'];
+const color=n=>shades[[...n].reduce((a,c)=>a+c.charCodeAt(0),0)%shades.length];
+async function load(){
+  const c=await api('/api/config');$('#topic').textContent=c.topic;$('#topicwrap').style.display=c.topic?'':'none';
+  const subs=await api('/api/subs');
+  $('#count').textContent=subs.length;
+  $('#total').textContent=Math.round(subs.filter(s=>!s.trial).reduce((a,s)=>a+s.price*({monthly:1,yearly:1/12,weekly:52/12}[s.cycle]),0)).toLocaleString();
+  $('#list').innerHTML=subs.map(s=>{
+    const dd=s.left===0?'D-day':s.left<0?'D+'+(-s.left):'D-'+s.left, cls=s.left<=0?'now':s.left<=3?'soon':'';
+    const a=esc(s.name),id=esc(s.id);
+    return `<div class="card"><div class="drop" style="--c:${color(s.name)}"></div>
+    <div class="info"><b>${a}</b>${s.trial?'<span class="tag">TRIAL</span>':''}<div class="meta">${s.next} · ${s.price.toLocaleString()}원 / ${unit[s.cycle]}</div></div>
+    <div class="dd ${cls}">${dd}</div>
+    <div class="acts">${!s.trial&&s.left<=0?`<button class="btn" onclick="confirmPay('${id}')">결제 확인</button>`:''}${s.trial?`<button class="gold" onclick="convert('${id}')">유료 전환</button>`:''}<button class="ghost" onclick="del('${id}')">삭제</button></div></div>`}).join('')||'<div class="empty">아직 등록된 구독이 없어요</div>';
+}
+$('#f').onsubmit=async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));d.trial=!!d.trial;await api('/api/subs','POST',d);e.target.reset();load()};
+const confirmPay=async id=>{if(confirm('결제를 확인하고 다음 결제일로 넘길까요?\n(해지했다면 취소 후 삭제하세요)')){await api('/api/subs/'+id+'/confirm','POST');load()}};
+const del=async id=>{if(confirm('삭제할까요?')){await api('/api/subs/'+id,'DELETE');load()}};
+const convert=async id=>{const date=prompt('첫 결제일 (YYYY-MM-DD)');if(date){await api('/api/subs/'+id,'PUT',{trial:false,date});load()}};
+const testPush=async()=>alert((await api('/api/test','POST')).ok?'전송됨! 폰 확인':'실패');
+load();
+</script></html>
